@@ -1,8 +1,8 @@
 <?php
-require_once ('/your/path/to/applepay_includes/apple_pay_conf.php');
+require_once ('../configuration.php');
 ?>
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="cs-CZ">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -123,7 +123,7 @@ document.getElementById("applePay").onclick = function(evt) {
 		promise.then(function (merchantSession) {
 			session.completeMerchantValidation(merchantSession);
 		}); 
-	}
+	};
 	
 
 	function performValidation(valURL) {
@@ -135,7 +135,7 @@ document.getElementById("applePay").onclick = function(evt) {
 				resolve(data);
 			};
 			xhr.onerror = reject;
-			xhr.open('GET', 'apple_pay_comm.php?u=' + valURL);
+			xhr.open('GET', 'create.php?u=' + valURL);
 			xhr.send();
 		});
 	}
@@ -155,7 +155,7 @@ document.getElementById("applePay").onclick = function(evt) {
 		session.completeShippingContactSelection(status, newShippingMethods, newTotal, newLineItems );
 		
 		
-	}
+	};
 	
 	session.onshippingmethodselected = function(event) {
 		logit('starting session.onshippingmethodselected');
@@ -170,7 +170,7 @@ document.getElementById("applePay").onclick = function(evt) {
 		session.completeShippingMethodSelection(status, newTotal, newLineItems );
 		
 		
-	}
+	};
 	
 	session.onpaymentmethodselected = function(event) {
 		logit('starting session.onpaymentmethodselected');
@@ -182,7 +182,7 @@ document.getElementById("applePay").onclick = function(evt) {
 		session.completePaymentMethodSelection( newTotal, newLineItems );
 		
 		
-	}
+	};
 	
 	session.onpaymentauthorized = function (event) {
 
@@ -204,7 +204,7 @@ document.getElementById("applePay").onclick = function(evt) {
 			logit( "result of sendPaymentToken() function =  " + success );
 			session.completePayment(status);
 		});
-	}
+	};
 
 	function sendPaymentToken(paymentToken) {
 		return new Promise(function(resolve, reject) {
@@ -223,7 +223,7 @@ document.getElementById("applePay").onclick = function(evt) {
 	session.oncancel = function(event) {
 		logit('starting session.cancel');
 		logit(event);
-	}
+	};
 	
 	session.begin();
 
